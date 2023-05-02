@@ -1,0 +1,6 @@
+express : build app ( server )
+mongoose : create model ( user , post ...)
+dotenv : hide information of username , password, url link to database, or port ... ( secret)
+helmet : secure request ( extra security )
+morgan : return status, url, time... in console
+nodemon : allow start once and restart all time when we change 
