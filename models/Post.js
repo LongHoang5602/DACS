@@ -3,18 +3,18 @@ const mongoose = require("mongoose")
 const PostSchema = new mongoose.Schema({
     userId: {
         type: String,
-        require:true
+        require: true
     },
     decs: {
         type: String,
-        max:500
+        max: 500
     },
     img: {
         type: String
     },
     likes: {
         type: Array,
-        default:[]
+        default: []
     },
 },
     { timestamps: true }
