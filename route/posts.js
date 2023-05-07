@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const Post = require("../models/Post")
 const User = require("../models/User")
-
+const Comment = require("../models/Comment")
 
 router.get("/", (req, res) => {
     res.send("Post route")
@@ -73,6 +73,7 @@ router.get("/:id", async (req, res) => {
         return res.status(500).json(err)
     }
 })
+// get all likes
 router.get("/all/likes", async (req, res) => {
     try {
         const post = await Post.findById(req.body.id)
@@ -106,8 +107,6 @@ router.get("/timeline/all", async (req, res) => {
         return res.status(500).json(err)
     }
 })
-
-
 
 
 module.exports = router

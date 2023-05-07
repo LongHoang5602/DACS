@@ -8,6 +8,7 @@ const { Db, MongoDBNamespace } = require("mongodb")
 const userRoute = require("./route/users")
 const authRoute = require("./route/auth")
 const postRoute = require("./route/posts")
+const commentRoute = require("./route/comments")
 dotenv.config()
 
 
@@ -33,9 +34,10 @@ database();
 app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
-app.use("/api/users",userRoute)
-app.use("/api/auth",authRoute)
-app.use("/api/posts",postRoute)
+app.use("/api/users", userRoute)
+app.use("/api/auth", authRoute)
+app.use("/api/posts", postRoute)
+app.use("/api/comments", commentRoute)
 // app.get("/", (req, res) => {
 //   res.send("Hello homepage")
 // })
