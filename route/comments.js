@@ -89,8 +89,16 @@ router.delete("/:id", async (req, res) => {
                 res.status(500).json(err)
             }
         }
+    }
+})
+// get cmt
+router.get("/:id", async (req, res) => {
 
-
+    try {
+        const comment = await Comment.findById(req.params.id)
+        res.status(200).json(comment)
+    } catch (err) {
+        return res.status(500).json(err)
     }
 })
 // like and dislike a cmt
@@ -110,14 +118,5 @@ router.put("/:id/like", async (req, res) => {
     }
 })
 
-// get cmt
-router.get("/:id", async (req, res) => {
 
-    try {
-        const comment = await Comment.findById(req.params.id)
-        res.status(200).json(comment)
-    } catch (err) {
-        return res.status(500).json(err)
-    }
-})
 module.exports = router
