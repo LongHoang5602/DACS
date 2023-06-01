@@ -2,6 +2,7 @@ const router = require("express").Router()
 //import express from 'express';
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 //import bcrypt from 'bcrypt';
 
 
@@ -9,6 +10,10 @@ const bcrypt = require("bcrypt")
 //register
 router.post("/register", async (req, res) => {
     try {
+        const userExist = await User.findOne({ email: req.body.email })
+        if (userExist) {
+            return res.status(404).json("User is exist")
+        }
         // generate new password        
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
@@ -18,11 +23,12 @@ router.post("/register", async (req, res) => {
             email: req.body.email,
             password: hashedPassword
         })
+        const token = jwt.sign({ email: newUser.email, id: newUser._id }, process.env.Secret_Key)
         // save user and respond
         const user = await newUser.save()
-        res.status(200).json(user)
+        return res.status(200).json({ user: user, token: token })
     } catch (err) {
-        console.log(err)
+        return res.json("Error !")
     }
 })
 
@@ -30,12 +36,17 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email })
-        !user && res.status(404).json("User not found")
+        if (!user) {
+            return res.status(404).json("User not found")
+        }
         const validPassword = await bcrypt.compare(req.body.password, user.password)
-        !validPassword && res.status(404).json("Wrong password")
-        res.status(200).json(user)
+        if (!validPassword) {
+            return res.status(404).json("Wrong password")
+        }
+        const token = jwt.sign({ email: user.email, id: user._id }, process.env.Secret_Key)
+        return res.status(200).json({ user: user, token: token })
     } catch (err) {
-        res.status(500).json(err)
+        return res.json("Error !")
     }
 })
 
@@ -43,15 +54,17 @@ router.post("/forget", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email })
         //const userId = await Post.findById(user.id)
-        !user && res.status(404).json("User not found")
+        if (!user) {
+            return res.status(404).json("User not found")
+        }
         let newPassword = "000000"
-        const salt = await bcrypt.genSalt(10)
+        const salt = await bcrypt.genSalt(10) //hashcode
         const hashedPassword = await bcrypt.hash(newPassword, salt)
         user.password = hashedPassword
         await user.save()
-        res.status(200).json(user)
+        return res.status(200).json(user)
     } catch (err) {
-        res.status(500).json(err)
+        return res.json("Error !")
     }
 })
 
