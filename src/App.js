@@ -1,6 +1,5 @@
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -40,7 +39,7 @@ function App() {
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/"/>;
     }
 
     return children;
@@ -65,6 +64,7 @@ function App() {
         },
       ],
     },
+    
     {
       path: "/login",
       element: <Login />,

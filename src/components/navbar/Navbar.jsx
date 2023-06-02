@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
+import logo from "../../assets/logo_food_vn.png"
 const Navbar = () => {
 
     const { toggle, darkMode } = useContext(DarkModeContext);
@@ -21,7 +22,8 @@ const Navbar = () => {
         <div className="navbar">
             <div className="left">
                 <Link to="/" style={{ textDecoration: "none" }}>
-                    <span>lamasocial</span>
+                    {/* <span>lamasocial</span> */}
+                    <img src={logo}></img>
                 </Link>
                 <HomeOutlinedIcon />
                 {darkMode ? (
