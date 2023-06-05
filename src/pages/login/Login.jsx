@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+//import { useHistory } from 'react-router-dom';
+import { Link, Navigate} from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import "./login.scss";
 import React, { useState, useEffect } from 'react';
@@ -11,8 +12,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
-    //const navigate = useNavigate();
+    //const history = useHistory();
+    
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -26,13 +27,16 @@ const Login = () => {
             },
             body: JSON.stringify(item),
         });
-        console.log(response)
+       
+        
         if (response.status === 200) {
             const data = await response.json();
-            navigate('/home');
-        } else {
+            login(data);
+            Navigate('/')
+            //history.push('/');
+          } else {
             alert('Invalid email or password');
-        }
+          }
     };
 
 
