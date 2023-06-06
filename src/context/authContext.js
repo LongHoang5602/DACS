@@ -2,45 +2,25 @@ import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(
     {
-        currentUser: "",
-        setUser: () => {}
+        currentUser:'',
+        auth: false,
     }
 );
 
 export const AuthContextProvider = ({ children }) => {
+    const login = (user) => {
+       
+        setUser((user) => ({
+            currentUser: user,
+            auth: true,
+        }));
+    };
 
-    // console.log(localStorage);
-
-    // const [currentUser, setCurrentUser] = useState(
-    //   // JSON.parse(localStorage.getItem("user")||"") || null
-    //   null
-    // );
-    
-    // const login = ({profile}) => {
-    //     //TO DO
-    //     // setCurrentUser({
-    //     //     id: 1,
-    //     //     name: "long tran",
-    //     //     profilePic:
-    //     //         "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    //     // });
-    //     setCurrentUser(profile)
-    // };
-    const setUser = (user) => {
-        console.log(user)
-        setTimeout(()=>{
-            setState2(...{
-                currentUser: "usernsfkdsak ",
-                    setUser: setUser
-                  } )
-        },1000)
-      }
-    
     const initState = {
-    currentUser: "asd",
-        setUser: setUser
-      } 
-      const [state2, setState2] = useState(initState)
+        currentUser: undefined,
+        auth: false
+    }
+    const [user, setUser] = useState(initState)
 
     // useEffect(() => {
     //     localStorage.setItem("user", JSON.stringify(currentUser));
@@ -48,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
 
     return (
         // <AuthContext.Provider value={{ currentUser, login }}>
-        <AuthContext.Provider value={state2}>
+        <AuthContext.Provider value={{ user, login }}>
             {children}
         </AuthContext.Provider>
     );

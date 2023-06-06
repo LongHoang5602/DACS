@@ -20,8 +20,8 @@ import { AuthContext,AuthContextProvider } from "./context/authContext";
 
 function App() {
   // const { currentUser } = useContext(AuthContext);
-  const context = useContext(AuthContext);
-
+  //const context = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
   const { darkMode } = useContext(DarkModeContext);
 
   const Layout = () => {
@@ -40,14 +40,13 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    console.log(context)
-    if (!context.currentUser) {
+    
+    if (!user.auth) {
+      console.log(user.auth)
       return <Navigate to="/login"/>;
     }
-
     return children;
   };
-
   const router = createBrowserRouter([
     {
       path: "/",
