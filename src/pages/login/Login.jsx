@@ -82,8 +82,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Home from "../home/Home";
 
-
-
 const Login = () => {
     const context  = useContext(AuthContext);
 

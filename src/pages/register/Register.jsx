@@ -8,6 +8,7 @@ import Home from "../home/Home";
 
 const Register = () => {
   const { register } = useContext(AuthContext);
+  const context  = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
@@ -25,14 +26,19 @@ const Register = () => {
       },
       body: JSON.stringify(item),
     });
+    console.log(response)
     if (response.status === 200) {
       const data = await response.json();
       localStorage.setItem('access_token', data.access_token);
+      context.setUser(data)
       console.log(data);
-      navigate('/login');
+      setTimeout(()=>{
+        navigate('/login');
+    },2000)
     } else {
       alert('Registration failed. Please try again.');
     }
+    
   };
 
   return (
@@ -54,9 +60,6 @@ const Register = () => {
         <div className="right">
             <h1>Register</h1>
             <form>
-                {/* <input type="text" placeholder="Username" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" /> */}
                 <input type="text"
                             placeholder="UserName"
                             value={username}

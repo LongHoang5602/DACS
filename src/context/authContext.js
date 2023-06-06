@@ -28,10 +28,8 @@ export const AuthContextProvider = ({ children }) => {
     // };
     const setUser = (user) => {
         console.log(user)
-        // setState2({...state2, currentUser: user})
-        
         setTimeout(()=>{
-            setState2(...this.state2,{
+            setState2(...{
                 currentUser: "usernsfkdsak ",
                     setUser: setUser
                   } )
