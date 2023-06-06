@@ -15,10 +15,11 @@ import Profile from "./pages/profile/Profile";
 import "./style.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
-import { AuthContext } from "./context/authContext";
+import { AuthContext,AuthContextProvider } from "./context/authContext";
 
 function App() {
-  const { currentUser } = useContext(AuthContext);
+  // const { currentUser } = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
   const { darkMode } = useContext(DarkModeContext);
 
@@ -38,7 +39,8 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    if (!currentUser) {
+    console.log(context)
+    if (!context.currentUser) {
       return <Navigate to="/login"/>;
     }
 
@@ -49,13 +51,16 @@ function App() {
     {
       path: "/",
       element: (
+       
+
         <ProtectedRoute>
           <Layout />
         </ProtectedRoute>
+        
       ),
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Home />,
         },
         {
@@ -76,9 +81,11 @@ function App() {
   ]);
 
   return (
+    <AuthContextProvider>
     <div>
       <RouterProvider router={router} />
     </div>
+    </AuthContextProvider>
   );
 }
 
