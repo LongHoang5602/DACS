@@ -14,19 +14,23 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import { Link } from "react-router-dom";
 const LeftBar = () => {
+    const { user } = useContext(AuthContext);
 
-    const { currentUser } = useContext(AuthContext);
+    const currentUser = user.currentUser.user;
     return (
         <div className="leftBar">
             <div className="container">
                 <div className="menu">
                     <div className="user">
-                        <img
-                            src={currentUser.profilePic}
-                            alt=""
-                        />
-                        <span>{ currentUser.name}</span>
+                        <Link to={`/profile/${currentUser._id}` }>
+                            <img
+                                src={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHCZuslFbn42wwA9qw6ywBERhtpr_yOFy3Cw&usqp=CAU"} 
+                                alt=""
+                            />
+                        </Link>
+                        <span>{currentUser.name}</span>
                     </div>
                     <div className="item">
                         <img src={Friends} alt="" />

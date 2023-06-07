@@ -7,16 +7,16 @@ import { AuthContext } from "../../context/authContext";
 
 const Share = () => {
 
-    const { currentUser } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     return (
         <div className="share">
             <div className="container">
                 <div className="top">
                     <img
-                        src={currentUser.profilePic}
+                        src={user.profilePic}
                         alt=""
                     />
-                    <input type="text" placeholder={`What's on your mind ${currentUser.name}?`} />
+                    <input type="text" placeholder={`What's on your mind ${user.name}?`} />
                 </div>
                 <hr />
                 <div className="bottom">

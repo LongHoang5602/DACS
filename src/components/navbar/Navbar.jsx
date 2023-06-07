@@ -15,8 +15,9 @@ import logo from "../../assets/logo_food_vn.png"
 const Navbar = () => {
 
     const { toggle, darkMode } = useContext(DarkModeContext);
-    const { currentUser } = useContext(AuthContext);
-
+    const { user } = useContext(AuthContext);
+    const currentUser = user.currentUser.user ;
+    console.log("navbar: ", currentUser)
 
     return (
         <div className="navbar">
@@ -42,10 +43,12 @@ const Navbar = () => {
                 <EmailOutlinedIcon />
                 <NotificationsOutlinedIcon />
                 <div className="user">
-                    <img
-                        src={currentUser.profilePic}
-                        alt=""
-                    />
+                <Link to={`/profile/${currentUser._id}` }>
+                            <img
+                                src={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHCZuslFbn42wwA9qw6ywBERhtpr_yOFy3Cw&usqp=CAU"} 
+                                alt=""
+                            />
+                        </Link>
                     <span>{currentUser.name}</span>
                 </div>
             </div>

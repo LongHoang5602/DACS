@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Home from "../home/Home";
 
 const Register = () => {
-  const { register } = useContext(AuthContext);
   const context  = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -30,7 +29,6 @@ const Register = () => {
     if (response.status === 200) {
       const data = await response.json();
       localStorage.setItem('access_token', data.access_token);
-      context.setUser(data)
       console.log(data);
       setTimeout(()=>{
         navigate('/login');

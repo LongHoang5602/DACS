@@ -9,8 +9,10 @@ const Login = () => {
    // const context = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
+    
     const handleLogin = async (event) => {
         event.preventDefault();
         //console.log(email, password)
@@ -23,13 +25,11 @@ const Login = () => {
             },
             body: JSON.stringify(item),
         });
-        console.log(response)
         if (response.status === 200) {
             const data = await response.json();
             login(data)
-            setTimeout(() => {
-                navigate('/home');
-            }, 2000);
+            navigate('/home');
+            
         } else {
             alert('Invalid email or password');
         }
@@ -59,7 +59,7 @@ const Login = () => {
                             placeholder="Password"
                             value={password}
                             onChange={(event) => setPassword(event.target.value)} />
-                        <button onClick={handleLogin}>Login</button>
+                        <button onClick={ handleLogin}>Login</button>
                     </form>
                 </div>
             </div>

@@ -2,26 +2,35 @@ import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(
     {
-        currentUser:'',
+        currentUser: {},
         auth: false,
     }
 );
 
 export const AuthContextProvider = ({ children }) => {
-    const login = (user) => {
+    const login = (data) => {
+        console.log("set currentUser: ", data);
        
-        setUser((user) => ({
-            currentUser: user,
+        setUser({
+            currentUser: {...data},
             auth: true,
-        }));
+        });
+        //console.log("auth", user.auth);
     };
 
     const initState = {
-        currentUser: undefined,
+        currentUser: {},
         auth: false
     }
     const [user, setUser] = useState(initState)
 
+
+
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(user.currentUser));
+    }, [user.currentUser]);
+
+    
     // useEffect(() => {
     //     localStorage.setItem("user", JSON.stringify(currentUser));
     // }, [currentUser]);

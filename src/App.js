@@ -40,9 +40,8 @@ function App() {
   };
 
   const ProtectedRoute = ({ children }) => {
-    
+    console.log(user)
     if (!user.auth) {
-      console.log(user.auth)
       return <Navigate to="/login"/>;
     }
     return children;
@@ -81,11 +80,9 @@ function App() {
   ]);
 
   return (
-    <AuthContextProvider>
     <div>
       <RouterProvider router={router} />
     </div>
-    </AuthContextProvider>
   );
 }
 
