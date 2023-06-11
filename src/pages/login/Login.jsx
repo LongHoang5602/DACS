@@ -28,8 +28,7 @@ const Login = () => {
         if (response.status === 200) {
             const data = await response.json();
             login(data)
-            navigate('/home');
-            
+            navigate('/home');   
         } else {
             alert('Invalid email or password');
         }

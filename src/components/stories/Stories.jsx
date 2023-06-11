@@ -9,22 +9,22 @@ const Stories = () => {
     //TEMPORARY
     const stories = [
         {
-            id: 1,
+            _id: 1,
             name: "BDC",
             img: "https://ketbanvietnam.com/wp-content/uploads/2022/08/nguc_bu-41.jpg",
         },
         {
-            id: 2,
+            _id: 2,
             name: "ABC",
             img: "https://znews-photo.zingcdn.me/w660/Uploaded/ofh_btgazspf/2019_09_20/6551657613483468119882577252616749667844096n156681182701518595034031567441982420569475801.jpg",
         },
         {
-            id: 3,
+            _id: 3,
             name: "MMM",
             img: "https://axinh.net/wp-content/uploads/2022/06/gai-xinh-vu-to-0-640x825.jpg",
         },
         {
-            id: 4,
+            _id: 4,
             name: "AAA",
             img: "https://anhsexyvsbg.com/wp-content/uploads/2022/08/thieucaidsadasda.jpg",
         },

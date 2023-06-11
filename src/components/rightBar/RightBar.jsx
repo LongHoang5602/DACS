@@ -42,7 +42,7 @@ const RightBar = () => {
                                 alt=""
                             />
                             <p>
-                                <span>Thanh Tung</span> đã bảo nộp đồ án cnmn
+                                <span>Thanh Tung</span> đã bảo nộp đồ án 
                             </p>
                         </div>
                         <span>1 year ago</span>

@@ -16,7 +16,7 @@ const Comments = () => {
         },
         {
             id: 2,
-            desc: "nung qua",
+            desc: "dep qua",
             name: "Thanh Dat",
             userId: 2,
             profilePic:

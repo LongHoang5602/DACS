@@ -5,11 +5,14 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^1.4.0",
     "jsonwebtoken": "^9.0.0",
     "react": "^18.2.0",
@@ -19,7 +22,9 @@
     "react-scripts": "5.0.1",
     "sass": "^1.62.1",
     "scss": "^0.2.4",
-    "web-vitals": "^2.1.4"
+    "tippy.js": "^6.3.7",
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",

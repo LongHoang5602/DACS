@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 const Profile = () => {
     const { user } = useContext(AuthContext);
-    const currentUser = user.currentUser.user;
+    const currentUser = user.currentUser;
     return (
         <div className="profile">
             <div className="images">
@@ -59,7 +59,7 @@ const Profile = () => {
                                 <span>{currentUser.diachichitiet}</span>
                             </div>
                         </div>
-                        <button>follow</button>
+                      
                         <div className="tieusu">{currentUser.tieusu}</div>
                     </div>
                     <div className="right">

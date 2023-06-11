@@ -12,11 +12,12 @@ import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 import logo from "../../assets/logo_food_vn.png"
+import Search from "../Search/search";
 const Navbar = () => {
 
     const { toggle, darkMode } = useContext(DarkModeContext);
     const { user } = useContext(AuthContext);
-    const currentUser = user.currentUser.user ;
+    const currentUser = user.currentUser ;
     console.log("navbar: ", currentUser)
 
     return (
@@ -35,7 +36,7 @@ const Navbar = () => {
                 <GridViewOutlinedIcon />
                 <div className="search">
                     <SearchOutlinedIcon />
-                    <input type="text" placeholder="Search..." />
+                   <Search/>
                 </div>
             </div>
             <div className="right">

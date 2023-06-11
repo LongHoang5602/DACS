@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 const LeftBar = () => {
     const { user } = useContext(AuthContext);
 
-    const currentUser = user.currentUser.user;
+    const currentUser = user.currentUser;
     return (
         <div className="leftBar">
             <div className="container">

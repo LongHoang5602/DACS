@@ -23,20 +23,15 @@ export const AuthContextProvider = ({ children }) => {
         auth: false
     }
     const [user, setUser] = useState(initState)
-
-
-
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(user.currentUser));
     }, [user.currentUser]);
 
     
-    // useEffect(() => {
-    //     localStorage.setItem("user", JSON.stringify(currentUser));
-    // }, [currentUser]);
+   
 
     return (
-        // <AuthContext.Provider value={{ currentUser, login }}>
+     
         <AuthContext.Provider value={{ user, login }}>
             {children}
         </AuthContext.Provider>
