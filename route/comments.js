@@ -3,9 +3,9 @@ const commentController = require("../controller/commentController")
 const midlewareController = require("../controller/midlewareController")
 
 // comment post
-router.post("/:id/comment", midlewareController.getUserIdFromToken, commentController.commentPost)
+router.post("/:id/comment", midlewareController.getUserIdFromToken, commentController.createCmt)
 // update a cmt
-router.put("/:id", midlewareController.getUserIdFromToken, commentController.updatePost)
+router.put("/:id", midlewareController.getUserIdFromToken, commentController.updateCmt)
 // delete a cmt
 router.delete("/:id", midlewareController.getUserIdFromToken, commentController.deleteComment)
 // get all cmt in posts

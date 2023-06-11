@@ -33,13 +33,13 @@ const middlewareController = {
             const token = authHeader.split(' ')[1];
             jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decoded) => {
                 if (err) {
-                    return res.sendStatus(403); // Không đúng token hoặc hết hạn
+                    return res.status(403).json("Invalid token"); // Không đúng token hoặc hết hạn
                 }
                 req.userId = decoded.id; // Lưu userId vào trong req để sử dụng ở các route khác
                 next();
             });
         } else {
-            res.sendStatus(401); // Không tồn tại token trong header
+            res.status(401).json("Not found token"); // Không tồn tại token trong header
         }
     }
 };

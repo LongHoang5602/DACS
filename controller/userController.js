@@ -44,6 +44,19 @@ const userController = {
 
             return res.status(403).json("err")
         }
+    }
+    ,
+    findAUser: async (req, res) => {
+        const username = req.params.username;
+
+        const users = await User.find({ username: { $regex: username, $options: "i" } }); // tìm kiếm user có username chứa chuỗi tên (không phân biệt hoa thường)
+        if (users) {
+            return res.status(200).json(users); // trả về danh sách user
+        } else {
+            return res.status(404).json("Not found");
+        }
+
+
     },
     followUser: async (req, res) => {
         if (req.body.userId !== req.params.id) {

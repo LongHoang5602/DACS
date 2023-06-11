@@ -17,6 +17,9 @@ router.delete("/:id", verifyTokenAndUserAuthorization, userController.deleteUser
 // get a user
 router.get("/:id", userController.getAUser)
 
+// router.get("/find", userController.findAUser)
+router.get('/find/:username', userController.findAUser)
+
 // follow a user
 router.put("/:id/follow", userController.followUser)
 

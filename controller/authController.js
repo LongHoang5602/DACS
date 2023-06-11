@@ -8,7 +8,6 @@ const authController = {
     generateAccessToken: (user) => {
         return jwt.sign(
             {
-
                 id: user.id,
                 isAdmin: user.isAdmin,
             },

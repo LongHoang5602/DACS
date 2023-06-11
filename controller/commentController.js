@@ -3,7 +3,7 @@ const User = require("../models/User")
 const Comment = require("../models/Comment")
 
 const commentController = {
-    commentPost: async (req, res) => {
+    createCmt: async (req, res) => {
         const newComment = new Comment({
             decs: req.body.decs,
             img: req.body.img,
@@ -11,29 +11,35 @@ const commentController = {
             userId: req.userId,
             cmtId: req.body.cmtId
         })
+        if (req.body.cmtId) {
+            const checkCmt = await Comment.findById(req.body.cmtId)
+            if (!checkCmt) {
+                return res.status(404).json("Comment này hiện không tồn tại")
+            }
+        }
         const post = await Post.findById(req.params.id)
-        if (req.body.id === undefined) {
+        if (req.body.cmtId === undefined) {
             try {
                 const savedComment = await newComment.save()
                 res.status(200).json(savedComment)
             } catch (err) {
-                return res.json("Error !")
+                return res.status(500).json("Error !")
             }
         } else {
             try {
-                const parentComment = await Comment.findById(req.body.id)
+                const parentComment = await Comment.findById(req.body.cmtId)
                 await parentComment.comment.push(newComment.id)
                 await parentComment.save()
                 newComment.cmtId = req.body.id
                 const savedComment = await newComment.save()
                 return res.status(200).json(savedComment)
             } catch (err) {
-                return res.json("Error !")
+                return res.status(500).json("Error !")
             }
         }
 
     },
-    updatePost: async (req, res) => {
+    updateCmt: async (req, res) => {
 
         try {
             const comment = await Comment.findById(req.params.id)
@@ -49,7 +55,6 @@ const commentController = {
     },
     deleteComment: async (req, res) => {
         const comment = await Comment.findById(req.params.id)
-
         if (comment.cmtId !== undefined) { // cmtId !== undefined là cmt con
             try {
                 if (comment.userId === req.userId) {
@@ -59,7 +64,7 @@ const commentController = {
                     return res.status(403).json("You can delete only your comment")
                 }
             } catch (err) {
-                return res.json("Error !")
+                return res.status(500).json("Error !")
             }
         } else {
             if (comment.comment === null) {
@@ -71,7 +76,7 @@ const commentController = {
                         return res.status(403).json("You can delete only your comment")
                     }
                 } catch (err) {
-                    return res.json("Error !")
+                    return res.status(500).json("Error !")
                 }
             } else {
                 try {
@@ -88,7 +93,7 @@ const commentController = {
                         return res.status(403).json("You can delete only your comment")
                     }
                 } catch (err) {
-                    return res.json("Error !")
+                    return res.status(500).json("Error !")
                 }
             }
         }
@@ -99,7 +104,7 @@ const commentController = {
             //const post = posts.find(post => post.id === postId); // Tìm bài đăng có id tương ứng trong mảng posts
 
             if (postCmt.length === 0) {
-                return res.status(404).json({ message: 'Bài đăng không tồn tại' }); // Trả về thông báo lỗi nếu không tìm thấy bài đăng
+                return res.status(404).json('Bài đăng không tồn tại'); // Trả về thông báo lỗi nếu không tìm thấy bài đăng
             }
 
             //const comments = post.; // Lấy tất cả các comment của bài đăng
@@ -110,7 +115,7 @@ const commentController = {
                 const commentParent = postCmt[i];
                 allComments.push(commentParent); // Thêm comment vào mảng allComments
 
-                // Duyệttiếp qua tất cả các reply của comment
+                // Duyệt tiếp qua tất cả các reply của comment
                 for (let j = 0; j < commentParent.comment.length; j++) {
                     const reply = commentParent.comment[j];
                     allComments.push(reply); // Thêm reply vào mảng allComments
@@ -119,7 +124,7 @@ const commentController = {
 
             return res.status(200).json(allComments); // Trả về tất cả các comment của bài đăng, bao gồm cả các comment con
         } catch (err) {
-            return res.json("Error !")
+            return res.status(500).json("Error !")
         }
     },
     getAComment: async (req, res) => {
@@ -128,22 +133,22 @@ const commentController = {
             const comment = await Comment.findById(req.params.id)
             return res.status(200).json(comment)
         } catch (err) {
-            return res.json("Error !")
+            return res.status(500).json("Error !")
         }
     },
     likeOrDislike: async (req, res) => {
 
         try {
             const comment = await Comment.findById(req.params.id)
-            if (!comment.likes.includes(req.body.userId)) {
-                await comment.updateOne({ $push: { likes: req.body.userId } })
+            if (!comment.likes.includes(req.userId)) {
+                await comment.updateOne({ $push: { likes: req.userId } })
                 return res.status(200).json("Comment have been liked")
             } else {
-                await comment.updateOne({ $pull: { likes: req.body.userId } })
+                await comment.updateOne({ $pull: { likes: req.userId } })
                 return res.status(200).json("Comment have been disliked")
             }
         } catch (err) {
-            return res.json("Error !")
+            return res.status(500).json("Error !")
         }
     }
 }

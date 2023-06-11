@@ -10,6 +10,8 @@ const userRoute = require("./route/users")
 const authRoute = require("./route/auth")
 const postRoute = require("./route/posts")
 const commentRoute = require("./route/comments")
+const fileUpload = require("express-fileupload")
+// const imageRoute = require("./route/image")
 dotenv.config()
 
 
@@ -39,6 +41,8 @@ app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/posts", postRoute)
 app.use("/api/comments", commentRoute)
+
+// app.use("/api/image", imageRoute)
 app.use(function (req, res, next) {
   // Set the Access-Control-Allow-Origin header to "" to allow requests from any origin.
   res.header('Access-Control-Allow-Origin', '');
