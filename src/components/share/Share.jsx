@@ -245,7 +245,7 @@
 //tesst4
 import React, { useState } from 'react'
 import axios from 'axios'
-
+import { useSessionStorage } from "react-use";
 import "./share.scss";
 import Image from "../../assets/img.png";
 import Map from "../../assets/map.png";
@@ -259,6 +259,7 @@ const Share = () => {
     const [desc, setDesc] = useState('')
     const [selectedFile, setSelectedFile] = useState(null)
 
+    const [token, setToken] = useSessionStorage("token");
     const handleInputChange = (e) => {
         setDesc(e.target.value)
     }
@@ -273,16 +274,30 @@ const Share = () => {
         data.append('desc', desc)
         data.append('image', selectedFile)
 
-        try {
-            const res = await axios.post('http://localhost:1812/api/posts', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            alert(res.data)
-        } catch (err) {
-            alert(err.response.data)
-        }
+        // try {
+        //     const res = await axios.post('http://localhost:1812/api/posts', data, {
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //             'Content-Type': 'multipart/form-data'
+        //         }
+        //     })
+        //     alert(res.data)
+        // } catch (err) {
+        //     alert(err.response.data)
+        // }
+        const makePostRequest = async (data) => {
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+            };
+
+            try {
+                const res = await axios.post('http://localhost:1812/api/posts', data, headers);
+                alert(res.data);
+            } catch (err) {
+                alert(err.response.data);
+            }
+        };
     }
 
     return (
