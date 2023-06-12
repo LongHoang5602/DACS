@@ -3,7 +3,7 @@ const postController = require("../controller/postController")
 const midlewareController = require("../controller/midlewareController")
 
 // create a post
-router.post("/", midlewareController.getUserIdFromToken, postController.createPost)
+router.post("/", midlewareController.getUserIdFromToken, postController.upload, postController.createPost)
 
 // update a post
 router.put("/:id", midlewareController.getUserIdFromToken, postController.updatePost)

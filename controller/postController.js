@@ -1,13 +1,25 @@
+const multer = require('multer')
+const path = require('path')
 const Post = require("../models/Post")
 const User = require("../models/User")
 const Comment = require("../models/Comment")
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'Images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
 
 const postController = {
     createPost: async (req, res) => {
+
         const newPost = new Post({
             userId: req.userId,
             decs: req.body.decs,
-            img: req.body.img
+            img: req.file.path
         })
         try {
             const savedPost = await newPost.save()
@@ -95,7 +107,21 @@ const postController = {
         } catch (err) {
             return res.status(500).json("Error !")
         }
-    }
+    },
+    upload: multer({
+        storage: storage,
+        limits: { fileSize: '1000000' },
+        fileFilter: (req, file, cb) => {
+            const fileTypes = /jpeg|jpg|png|gif/
+            const mimeType = fileTypes.test(file.mimetype)
+            const extname = fileTypes.test(path.extname(file.originalname))
+
+            if (mimeType && extname) {
+                return cb(null, true)
+            }
+            cb('Give proper files formate to upload')
+        }
+    }).single('img')
 
 }
 module.exports = postController

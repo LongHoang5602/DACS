@@ -1,6 +1,16 @@
-const User = require("../models/User")
 const bcrypt = require("bcrypt")
+const multer = require('multer')
+const path = require('path')
+const User = require("../models/User")
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'Images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
 
 const userController = {
     updateUser: async (req, res) => {
@@ -97,6 +107,20 @@ const userController = {
             return res.status(403).json("You can't unfollow yourself")
         }
 
-    }
+    },
+    upload: multer({
+        storage: storage,
+        limits: { fileSize: '1000000' },
+        fileFilter: (req, file, cb) => {
+            const fileTypes = /jpeg|jpg|png|gif/
+            const mimeType = fileTypes.test(file.mimetype)
+            const extname = fileTypes.test(path.extname(file.originalname))
+
+            if (mimeType && extname) {
+                return cb(null, true)
+            }
+            cb('Give proper files formate to upload')
+        }
+    }).single('coverPicture')
 }
 module.exports = userController
