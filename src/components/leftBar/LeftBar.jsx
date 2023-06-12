@@ -92,6 +92,10 @@ const LeftBar = () => {
                         <img src={Courses} alt="" />
                         <span>Courses</span>
                     </div>
+                    <Link className="item" to='/login'>
+                        <img src={Courses} alt="" />
+                        <span>Logout</span>
+                    </Link>
                 </div>
             </div>
         </div>

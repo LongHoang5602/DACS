@@ -4,6 +4,8 @@ import { faCircleXmark, faSearch, faSpinner } from '@fortawesome/free-solid-svg-
 import { Wrapper as PopperWrapper } from '../Popper';
 import useDebounce from '../../hooks/useDebounce';
 import Tippy from '@tippyjs/react/headless';
+import AccountItem from '../Accountitem';
+
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
@@ -20,26 +22,16 @@ function Search() {
             setSearchResult([]);
             return;
         }
-        //setLoading(true);
-        //có 2 cách
-        //fech
-        // axios và import, i axios (npm not 0.2.0)... XMLHttpRequest
 
-
-
-        // setTimeout(()=>{
-        //             setSearchResult([1,2,3,1]);
-        //            // setSearchResult([]);
-        // },0);
-        //fetch('https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent{debounced}}&type=less')
-        fetch(`http://localhost:1812/api/users/find/${searchValue}`)
-            .then((res) => res.json())
+        fetch(`http://localhost:1812/api/users/find/${debounced}`)
+            .then(res => res.json())
             .then((res) => {
-                setSearchResult(res.data);
+                console.log(res)
+                setSearchResult(res);
                 setLoading(false);
             })
             .catch(() => {
-                 setLoading(false);
+                setLoading(false);
             })
     }, [debounced]);
     const handClear = () => {
@@ -53,7 +45,6 @@ function Search() {
 
     return (
         <Tippy
-
             interactive
             visible={showResult && searchResult.length > 0}
             render={(attrs) => (
@@ -66,9 +57,7 @@ function Search() {
                     <PopperWrapper>
                         <h4 className="search__title">Accounts</h4>
                         {searchResult.map((result) => (
-                            <div>
-                                {result}
-                            </div>
+                            <AccountItem key={result._id} data={result} />
                         ))}
                     </PopperWrapper>
                 </div>
@@ -80,7 +69,9 @@ function Search() {
                     ref={inputRef}
                     value={searchValue}
                     spellCheck="false"
-                    onChange={e => setSearchValue(e.target.value)}
+                    onChange={e => {
+                        setSearchValue(e.target.value)
+                    }}
                     onfocus={() => setshowResult(true)}
                 />
 

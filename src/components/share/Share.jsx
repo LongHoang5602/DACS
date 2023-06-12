@@ -254,7 +254,9 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const Share = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    const currentUser = user.currentUser ;
+   
 
     const [desc, setDesc] = useState('')
     const [selectedFile, setSelectedFile] = useState(null)
@@ -304,10 +306,12 @@ const Share = () => {
         <div className="share">
             <div className="container">
                 <div className="top">
+
                     <img
-                        src={user.profilePic}
-                        alt="Profile"
+                        src={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHCZuslFbn42wwA9qw6ywBERhtpr_yOFy3Cw&usqp=CAU"}
+                        alt=""
                     />
+
                     <input type="text" placeholder={`What's on your mind ${user.name}?`}
                         onChange={handleInputChange}
 
