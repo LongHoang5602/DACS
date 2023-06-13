@@ -352,74 +352,76 @@ const Share = () => {
         data.append('desc', desc)
         data.append('image', selectedFile)
 
-            // try {
-            //     console.log('desc',desc)
-            //     console.log('img' ,selectedFile)
-            //     const res = await axios.post('http://localhost:1812/api/posts', data, headers);
-            //     alert(res.data);
-            // } catch (err) {
-            //     alert(err.response.data);
-            // }
-            if(desc){
-                const resp = await axios.post('http://localhost:1812/api/posts', data, {
-                    headers: {
-                      "content-type": "multipart/form-data",
-                      Authorization: `Bearer ${currentUser.accessToken}`,
-                    },
-                  });
+        // try {
+        //     console.log('desc',desc)
+        //     console.log('img' ,selectedFile)
+        //     const res = await axios.post('http://localhost:1812/api/posts', data, headers);
+        //     alert(res.data);
+        // } catch (err) {
+        //     alert(err.response.data);
+        // }
+        if (desc) {
+            const resp = await axios.post('http://localhost:1812/api/posts', data, {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    Authorization: `Bearer ${currentUser.accessToken}`,
+                },
+            });
             if (resp.status === 200) {
                 const data = await resp.data;
-                console.log('OKE',data)
+                console.log('OKE', data)
 
             } else {
                 alert('err');
-            }     
+            }
+        }
     }
-}
     return (
-        <div className="share">
-            <div className="container">
-                <div className="top">
+        <form >
+            <div className="share">
+                <div className="container">
+                    <div className="top">
 
-                    <img
-                        src={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHCZuslFbn42wwA9qw6ywBERhtpr_yOFy3Cw&usqp=CAU"}
-                        alt=""
-                    />
-
-                    <input type="text" placeholder={`What's on your mind ${user.name}?`}
-                        onChange={handleInputChange}
-
-                    />
-                </div>
-                <hr />
-                <div className="bottom">
-                    <div className="left">
-                        <input type="file" id="file" style={{ display: "none" }}
-                            accept=".png,.jpeg,.jpg,.gif"
-                            onChange={handleFileChange}
+                        <img
+                            src={currentUser.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHCZuslFbn42wwA9qw6ywBERhtpr_yOFy3Cw&usqp=CAU"}
+                            alt=""
                         />
-                        <label htmlFor="file">
-                            <div className="item">
-                                <img src={Image} alt="" />
-                                <span>Add Image</span>
-                            </div>
-                        </label>
-                        <div className="item">
-                            <img src={Map} alt="Add Place" />
-                            <span>Add Place</span>
-                        </div>
-                        <div className="item">
-                            <img src={Friend} alt="Tag Friends" />
-                            <span>Tag Friends</span>
-                        </div>
+
+                        <input type="text" placeholder={`What's on your mind ${user.name}?`}
+                            onChange={handleInputChange}
+
+                        />
                     </div>
-                    <div className="right">
-                        <button onClick={handleSubmit}>Share</button>
+                    <hr />
+                    <div className="bottom">
+                        <div className="left">
+                            <input type="file" id="file" style={{ display: "none" }}
+                                accept=".png,.jpeg,.jpg,.gif"
+                                onChange={handleFileChange}
+                            />
+                            <label htmlFor="file">
+                                <div className="item">
+                                    <img src={Image} alt="" />
+                                    <span>Add Image</span>
+                                </div>
+                            </label>
+                            <div className="item">
+                                <img src={Map} alt="Add Place" />
+                                <span>Add Place</span>
+                            </div>
+                            <div className="item">
+                                <img src={Friend} alt="Tag Friends" />
+                                <span>Tag Friends</span>
+                            </div>
+                        </div>
+                        <div className="right">
+                            <button onClick={handleSubmit}>Share</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </form>
-    );
-};
+   
+)};
 
 export default Share;
