@@ -26,15 +26,16 @@
       }
 
       .search {
-        margin-left: 20px;
+       // margin-left: 20px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        //gap: 10px;
         border: 1px solid themed("border");
         border-radius: 20px;
-        padding: 5px;
+        //padding: 5px;
 
         input {
+          padding-left: 30px;
           border: none;
           width: 500px;
           background-color: transparent;

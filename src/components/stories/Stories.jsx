@@ -5,28 +5,30 @@ import { AuthContext } from "../../context/authContext"
 const Stories = () => {
 
     const { user } = useContext(AuthContext)
+    
 
     //TEMPORARY
     const stories = [
         {
             _id: 1,
-            name: "BDC",
-            img: "https://ketbanvietnam.com/wp-content/uploads/2022/08/nguc_bu-41.jpg",
+            name: "Bánh Xèo",
+            //img: "https://ketbanvietnam.com/wp-content/uploads/2022/08/nguc_bu-41.jpg",
+            img: "https://cdnimg.vietnamplus.vn/uploaded/ngtnnn/2022_07_27/2707banhxeo.jpg",
         },
         {
             _id: 2,
-            name: "ABC",
-            img: "https://znews-photo.zingcdn.me/w660/Uploaded/ofh_btgazspf/2019_09_20/6551657613483468119882577252616749667844096n156681182701518595034031567441982420569475801.jpg",
+            name: "Hambuger",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu6FQ8GuDCMg2kw_hYc5n93GYcqHPD7PexhabjNOek&s",
         },
         {
             _id: 3,
-            name: "MMM",
-            img: "https://axinh.net/wp-content/uploads/2022/06/gai-xinh-vu-to-0-640x825.jpg",
+            name: "Bún bò",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4JvsvkD3m-S_xyb7lgAmOyiCFn2IyWD6z83hJpW0e&s",
         },
         {
             _id: 4,
-            name: "AAA",
-            img: "https://anhsexyvsbg.com/wp-content/uploads/2022/08/thieucaidsadasda.jpg",
+            name: "Cake",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHo5uE_JLlCSZuMP3vx6CWD758BbiWMHDBEw&usqp=CAU",
         },
     ];
 
