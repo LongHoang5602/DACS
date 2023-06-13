@@ -91,7 +91,7 @@ function Search() {
 
 
                 <button className="search__btn">
-                    <FontAwesomeIcon icon={faSearch} />
+                    {/* <FontAwesomeIcon icon={faSearch} /> */}
                 </button>
             </div>
         </Tippy>
