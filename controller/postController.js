@@ -15,18 +15,31 @@ const storage = multer.diskStorage({
 
 const postController = {
     createPost: async (req, res) => {
-
-        const newPost = new Post({
-            userId: req.userId,
-            decs: req.body.decs,
-            img: req.file.path
-        })
-        try {
-            const savedPost = await newPost.save()
-            return res.status(200).json(savedPost)
-        } catch (err) {
-            return res.status(500).json("Error !")
+        if (req.file) {
+            const newPost = new Post({
+                userId: req.userId,
+                decs: req.body.decs,
+                img: req.file.path
+            })
+            try {
+                const savedPost = await newPost.save()
+                return res.status(200).json(savedPost)
+            } catch (err) {
+                return res.status(500).json("Error !")
+            }
+        } else {
+            const newPost = new Post({
+                userId: req.userId,
+                decs: req.body.decs,
+            })
+            try {
+                const savedPost = await newPost.save()
+                return res.status(200).json(savedPost)
+            } catch (err) {
+                return res.status(500).json("Error !")
+            }
         }
+
     },
     getAPost: async (req, res) => {
         try {
@@ -40,8 +53,15 @@ const postController = {
         try {
             const post = await Post.findById(req.params.id)
             if (post.userId === req.userId) {
+                if (req.file) {
+                    await post.updateOne({
+                        $set: {
+                            img: req.file.path
+                        }
+                    })
+                }
                 await post.updateOne({ $set: req.body })
-                return res.status(200).json("Post have been update")
+                return res.status(200).json(post)
             } else {
                 return res.status(403).json("You can update only your post")
             }
@@ -110,7 +130,7 @@ const postController = {
     },
     upload: multer({
         storage: storage,
-        limits: { fileSize: '1000000' },
+        limits: { fileSize: '5000000' },
         fileFilter: (req, file, cb) => {
             const fileTypes = /jpeg|jpg|png|gif/
             const mimeType = fileTypes.test(file.mimetype)

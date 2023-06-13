@@ -8,28 +8,62 @@ const storage = multer.diskStorage({
         cb(null, 'Images')
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname))
+        cb(null, "user" + Date.now() + path.extname(file.originalname))
     }
 })
 
 const userController = {
     updateUser: async (req, res) => {
-        if (req.body.password) {
-            try {
-                const salt = await bcrypt.genSalt(10)
-                req.body.password = await bcrypt.hash(req.body.password, salt)
-            } catch (err) {
-                return res.json("Error !")
+        const id = req.params.id;
+        const body = req.body;
+        if (req.params.id === req.userId) {
+            if (req.body.password) {
+                try {
+                    const salt = await bcrypt.genSalt(10)
+                    req.body.password = await bcrypt.hash(req.body.password, salt)
+                } catch (err) {
+                    return res.json("Error !")
+                }
             }
-
+            const user = await User.findById(req.params.id)
+            await user.updateOne({ $set: req.body })
+            console.log(req.body)
+            return res.status(200).json(user)
+        } else {
+            return res.status(403).json("You can update only your account")
         }
-        try {
-            const user = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body,
+
+    },
+    updateCoverImgUser: async (req, res) => {
+
+        if (req.params.id === req.userId) {
+            const user = await User.findById(req.params.id)
+            await user.updateOne({
+                $set: {
+                    coverPicture: req.file.path
+                }
             })
-            return res.status(200).json("Account has been update")
-        } catch (err) {
-            return res.status(500).json(err)
+
+            return res.status(200).json(user)
+        } else {
+            return res.status(403).json("You can update only your account")
+        }
+    }
+    ,
+    updateProfileImgUser: async (req, res) => {
+        const id = req.params.id;
+        const body = req.body;
+        if (req.params.id === req.userId) {
+            const user = await User.findById(req.params.id)
+            await user.updateOne({
+                $set: {
+                    profilePicture: req.file.path
+                }
+            })
+            console.log(req.body)
+            return res.status(200).json(user)
+        } else {
+            return res.status(403).json("You can update only your account")
         }
     },
     deleteUser: async (req, res) => {
@@ -108,7 +142,7 @@ const userController = {
         }
 
     },
-    upload: multer({
+    uploadCoverImg: multer({
         storage: storage,
         limits: { fileSize: '1000000' },
         fileFilter: (req, file, cb) => {
@@ -122,5 +156,19 @@ const userController = {
             cb('Give proper files formate to upload')
         }
     }).single('coverPicture')
+    , uploadProfileImg: multer({
+        storage: storage,
+        limits: { fileSize: '1000000' },
+        fileFilter: (req, file, cb) => {
+            const fileTypes = /jpeg|jpg|png|gif/
+            const mimeType = fileTypes.test(file.mimetype)
+            const extname = fileTypes.test(path.extname(file.originalname))
+
+            if (mimeType && extname) {
+                return cb(null, true)
+            }
+            cb('Give proper files formate to upload')
+        }
+    }).single('profilePicture')
 }
 module.exports = userController

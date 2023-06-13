@@ -6,7 +6,7 @@ const midlewareController = require("../controller/midlewareController")
 router.post("/", midlewareController.getUserIdFromToken, postController.upload, postController.createPost)
 
 // update a post
-router.put("/:id", midlewareController.getUserIdFromToken, postController.updatePost)
+router.put("/:id", midlewareController.getUserIdFromToken, postController.upload, postController.updatePost)
 
 // delete a post
 router.delete("/:id", midlewareController.getUserIdFromToken, postController.deletePost)

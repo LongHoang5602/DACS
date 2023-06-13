@@ -2,6 +2,7 @@ const router = require("express").Router()
 const User = require("../models/User")
 const bcrypt = require("bcrypt")
 const userController = require("../controller/userController")
+const midlewareController = require("../controller/midlewareController")
 const {
     verifyToken,
     verifyTokenAndAdmin,
@@ -9,7 +10,11 @@ const {
 } = require("../controller/verifyTokenController");
 
 // update user
-router.put("/:id", verifyTokenAndUserAuthorization, userController.updateUser)
+router.put("/:id", midlewareController.getUserIdFromToken, userController.updateUser)
+
+router.put("/:id/coverimg", midlewareController.getUserIdFromToken, userController.uploadCoverImg, userController.updateCoverImgUser)
+
+router.put("/:id/profileimg", midlewareController.getUserIdFromToken, userController.uploadProfileImg, userController.updateProfileImgUser)
 
 // delete user
 router.delete("/:id", verifyTokenAndUserAuthorization, userController.deleteUser)
