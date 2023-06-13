@@ -9,6 +9,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts"
+
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 const Profile = () => {
@@ -66,7 +67,7 @@ const Profile = () => {
                         <EmailOutlinedIcon />
                         <MoreVertIcon />     
                     </div>
-                    
+                    <div><button>Profile img</button></div>
                 </div>
                
                 <Posts />

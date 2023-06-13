@@ -26,14 +26,19 @@
       }
 
       .search {
-       // margin-left: 20px;
+        margin-left: 200px;
+        height: 30px;
         display: flex;
         align-items: center;
         //gap: 10px;
         border: 1px solid themed("border");
         border-radius: 20px;
-        //padding: 5px;
-
+        //padding-top: 15px;
+        margin-top: 30px;
+        transform: translateY(-50%);
+	      background: transparent;
+	      color: black;
+        
         input {
           padding-left: 30px;
           border: none;

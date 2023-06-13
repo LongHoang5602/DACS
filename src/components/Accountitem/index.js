@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 
 function AccountItem({ data }) {
     return (
-        <Link to={`/users/${data._id}` } className="wrapper">
+        <Link to={`/users/${data._id}` } className="wrapper" >
             {/* <img className='hinhanh' src={data.profilePicture || "https://pixlok.com/wp-content/uploads/2022/02/Profile-Icon-SVG-09856789.png"} alt={data.username} />
              */}
-            <div className='abc' style={{height: "100px" , backgroundColor:"red"}}>
-            <img className='hinhanh' style={{height: "50px"}} src={ data.profilePicture || "https://cdn-icons-png.flaticon.com/512/3106/3106773.png" } alt={data.username} />
+            <div className='abc' style={{height: "120px", width:"400px", backgroundColor:"white"}}>
+            <img className='hinhanh' style={{height: "60px", width:"80px", borderRadius:"10%"}} src={ data.profilePicture || "https://cdn-icons-png.flaticon.com/512/3106/3106773.png" } />
             <div className="info">
                 <p className="name">
-                    <h6>{data.username}</h6>
+                    <h5>{data.username}</h5>
                     <span> {data.isAdmin && <FontAwesomeIcon icon={faCheckCircle} className="check" />}</span>
                 </p>
             </div>

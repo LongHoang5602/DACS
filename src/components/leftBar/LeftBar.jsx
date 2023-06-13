@@ -88,10 +88,10 @@ const LeftBar = () => {
                         <img src={Tutorials} alt="" />
                         <span>Tutorials</span>
                     </div>
-                    <div className="item">
+                    {/* <div className="item">
                         <img src={Courses} alt="" />
                         <span>Courses</span>
-                    </div>
+                    </div> */}
                     <Link className="item" to='/login'>
                         <img src={Courses} alt="" />
                         <span>Logout</span>
