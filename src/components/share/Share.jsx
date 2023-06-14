@@ -1,14 +1,14 @@
 
 //tesst4
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useSessionStorage } from "react-use";
-import "./share.scss";
-import Image from "../../assets/img.png";
-import Map from "../../assets/map.png";
-import Friend from "../../assets/friend.png";
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
+// import React, { useState } from 'react'
+// import axios from 'axios'
+// import { useSessionStorage } from "react-use";
+// import "./share.scss";
+// import Image from "../../assets/img.png";
+// import Map from "../../assets/map.png";
+// import Friend from "../../assets/friend.png";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/authContext";
 
 // const Share = () => {
 //     const fs = require('fs');
@@ -349,8 +349,8 @@ const Share = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
-        data.append('desc', desc)
-        data.append('image', selectedFile)
+        data.append('decs', desc)
+        data.append('img', selectedFile)
 
         // try {
         //     console.log('desc',desc)
@@ -360,12 +360,15 @@ const Share = () => {
         // } catch (err) {
         //     alert(err.response.data);
         // }
+        console.log(desc)
+        console.log(data)
         if (desc) {
             const resp = await axios.post('http://localhost:1812/api/posts', data, {
                 headers: {
-                    "content-type": "multipart/form-data",
+                    'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
                     Authorization: `Bearer ${currentUser.accessToken}`,
                 },
+
             });
             if (resp.status === 200) {
                 const data = await resp.data;
@@ -421,7 +424,8 @@ const Share = () => {
                 </div>
             </div>
         </form>
-   
-)};
+
+    )
+};
 
 export default Share;
