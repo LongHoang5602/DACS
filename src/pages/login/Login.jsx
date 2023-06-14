@@ -46,6 +46,9 @@ const Login = () => {
                     <Link to="/register">
                         <button>Register</button>
                     </Link>
+                    <Link to='/forget'>
+                    <button>forgot password</button>
+                    </Link>
                 </div>
                 <div className="right">
                     <h1>Login</h1>
@@ -59,6 +62,7 @@ const Login = () => {
                             value={password}
                             onChange={(event) => setPassword(event.target.value)} />
                         <button onClick={ handleLogin}>Login</button>
+                        
                     </form>
                 </div>
             </div>

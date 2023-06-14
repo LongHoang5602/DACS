@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import ForgotPassword from "./pages/forget/forget";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -17,6 +18,7 @@ import "./style.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext,AuthContextProvider } from "./context/authContext";
+
 
 function App() {
   // const { currentUser } = useContext(AuthContext);
@@ -76,6 +78,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/forget",
+      element: <ForgotPassword/>
     },
   ]);
 
