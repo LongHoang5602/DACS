@@ -1,0 +1,6 @@
+.search__result {
+  display: flex;
+  height: 100px;
+  z-index: 10;
+  background-color: red;
+}/*# sourceMappingURL=search.css.map */

@@ -1,6 +1,6 @@
 
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
 //tesst4
 // import React, { useState } from 'react'
 // import axios from 'axios'
@@ -322,7 +322,7 @@
 
 
 
->>>>>>> b82989466f5cf7d189819f4a4c15b5e91fbc0f95
+// >>>>>>> b82989466f5cf7d189819f4a4c15b5e91fbc0f95
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useSessionStorage } from "react-use";
@@ -352,24 +352,8 @@ const Share = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
-<<<<<<< HEAD
         data.append('desc', desc)
         data.append('image', selectedFile)
-=======
-        data.append('decs', desc)
-        data.append('img', selectedFile)
-
-        // try {
-        //     console.log('desc',desc)
-        //     console.log('img' ,selectedFile)
-        //     const res = await axios.post('http://localhost:1812/api/posts', data, headers);
-        //     alert(res.data);
-        // } catch (err) {
-        //     alert(err.response.data);
-        // }
-        console.log(desc)
-        console.log(data)
->>>>>>> b82989466f5cf7d189819f4a4c15b5e91fbc0f95
         if (desc) {
             const resp = await axios.post('http://localhost:1812/api/posts', data, {
                 headers: {

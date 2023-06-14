@@ -12,7 +12,7 @@ const RightBar = () => {
                                 src="https://scontent-kul3-1.xx.fbcdn.net/v/t39.30808-6/322801516_839452683933438_7468276007487493613_n.jpg?stp=cp6_dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=saoJVJc7C-UAX-cybJb&_nc_ht=scontent-kul3-1.xx&oh=00_AfBQiMjlWWEVRlsvJ4UPMxtANBGTCGdT0DxdqH0_4lP9Zg&oe=648C58AD"
                                 alt=""
                             />
-                            <span>Jony Dang</span>
+                            <span>Cơm Pò Luk Lak</span>
                         </div>
                         <div className="buttons">
                             <button>follow</button>
@@ -26,7 +26,7 @@ const RightBar = () => {
                                 src="https://scontent-kul3-1.xx.fbcdn.net/v/t1.6435-9/165787700_117421240437366_9165507717813368156_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=174925&_nc_ohc=utF_oDHQdz4AX-whZkI&_nc_ht=scontent-kul3-1.xx&oh=00_AfCigdliVYJ-sqoz0OaRRaUiUH8YiSFWMosKi0ZReh3ziA&oe=64AFB3FA"
                                 alt=""
                             />
-                            <span>hutech</span>
+                            <span>Nam sinh đẹp trai ẩn danh</span>
                         </div>
                         <div className="buttons">
                             <button>follow</button>

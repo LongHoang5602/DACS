@@ -7,13 +7,15 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import { useState } from "react";
-
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 const Post = ({ post }) => {
     const [commentOpen, setCommentOpen] = useState(false);
+    const { user } = useContext(AuthContext);
+    const currentUser = user.currentUser ;
 
     //TEMPORARY
     const liked = false;
-
     return (
         <div className="post">
             <div className="container">
@@ -25,21 +27,22 @@ const Post = ({ post }) => {
                                 to={`/profile/${post.userId}`}
                                 style={{ textDecoration: "none", color: "inherit" }}
                             >
-                                <span className="name">{post.name}</span>
+                                {/* <span className="name">{post.name}</span> */}
+                                <span className="name">{currentUser._id}</span>
                             </Link>
-                            <span className="date">3 min ago</span>
+                            <span className="date">{currentUser.updatedAt}</span>
                         </div>
                     </div>
                     <MoreHorizIcon />
                 </div>
                 <div className="content">
-                    <p>{post.desc}</p>
-                    <img src={post.img} alt="" />
+                    <p>{currentUser.desc}</p>
+                    <img src={currentUser.img } alt="" />
                 </div>
                 <div className="info">
                     <div className="item">
                         {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-                        12 Likes
+                        {currentUser.likes}
                     </div>
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
                         <TextsmsOutlinedIcon />
