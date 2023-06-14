@@ -101,28 +101,20 @@ const commentController = {
     getAllPostCmt: async (req, res) => {
         try {
             const postCmt = await Comment.find({ postId: req.params.id })
-            //const post = posts.find(post => post.id === postId); // Tìm bài đăng có id tương ứng trong mảng posts
 
             if (postCmt.length === 0) {
-                return res.status(404).json('Bài đăng không tồn tại'); // Trả về thông báo lỗi nếu không tìm thấy bài đăng
+                return res.status(404).json('Not found post');
             }
-
-            //const comments = post.; // Lấy tất cả các comment của bài đăng
-            const allComments = []; // Tạo một mảng rỗng để chứa tất cả các comment, bao gồm cả các comment con
-
-            // Duyệt qua tất cả các comment và các comment con của bài đăng
+            const allComments = [];
             for (let i = 0; i < postCmt.length; i++) {
                 const commentParent = postCmt[i];
-                allComments.push(commentParent); // Thêm comment vào mảng allComments
-
-                // Duyệt tiếp qua tất cả các reply của comment
+                allComments.push(commentParent);
                 for (let j = 0; j < commentParent.comment.length; j++) {
                     const reply = commentParent.comment[j];
-                    allComments.push(reply); // Thêm reply vào mảng allComments
+                    allComments.push(reply);
                 }
             }
-
-            return res.status(200).json(allComments); // Trả về tất cả các comment của bài đăng, bao gồm cả các comment con
+            return res.status(200).json(allComments);
         } catch (err) {
             return res.status(500).json("Error !")
         }
@@ -137,7 +129,6 @@ const commentController = {
         }
     },
     likeOrDislike: async (req, res) => {
-
         try {
             const comment = await Comment.findById(req.params.id)
             if (!comment.likes.includes(req.userId)) {

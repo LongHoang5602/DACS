@@ -65,12 +65,9 @@ const authController = {
             if (!validPassword) {
                 return res.status(404).json("Wrong password")
             }
-            //Generate access token
             const accessToken = authController.generateAccessToken(user);
-            //Generate refresh token
             const refreshToken = authController.generateRefreshToken(user);
             refreshTokens.push(refreshToken);
-            //STORE REFRESH TOKEN IN COOKIE
             res.cookie("refreshToken", refreshToken, {
                 httpOnly: true,
                 secure: false,
