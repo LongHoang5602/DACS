@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/authContext";
 const Post = ({ post }) => {
     const [commentOpen, setCommentOpen] = useState(false);
     const { user } = useContext(AuthContext);
-    const currentUser = user.currentUser ;
+    const currentUser = user.currentUser;
 
     //TEMPORARY
     const liked = false;
@@ -28,7 +28,7 @@ const Post = ({ post }) => {
                                 style={{ textDecoration: "none", color: "inherit" }}
                             >
                                 {/* <span className="name">{post.name}</span> */}
-                                <span className="name">{currentUser._id}</span>
+                                <span className="name">{currentUser.username}</span>
                             </Link>
                             <span className="date">{currentUser.updatedAt}</span>
                         </div>
@@ -37,7 +37,7 @@ const Post = ({ post }) => {
                 </div>
                 <div className="content">
                     <p>{currentUser.desc}</p>
-                    <img src={currentUser.img } alt="" />
+                    <img src={currentUser.img} alt="" />
                 </div>
                 <div className="info">
                     <div className="item">

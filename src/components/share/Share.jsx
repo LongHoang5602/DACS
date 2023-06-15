@@ -338,7 +338,7 @@ const Share = () => {
     const currentUser = user.currentUser;
 
 
-    const [desc, setDesc] = useState('')
+    const [decs, setDesc] = useState('')
     const [selectedFile, setSelectedFile] = useState(null)
     const [status, setStatus] = useState("")
     //const [token, setToken] = useSessionStorage("token");
@@ -352,9 +352,9 @@ const Share = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
-        data.append('desc', desc)
+        data.append('decs', decs)
         data.append('image', selectedFile)
-        if (desc) {
+        if (decs) {
             const resp = await axios.post('http://localhost:1812/api/posts', data, {
                 headers: {
                     'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
@@ -365,11 +365,12 @@ const Share = () => {
             if (resp.status === 200) {
                 const data = await resp.data;
                 console.log('OKE', data)
-
+                setDesc('')
             } else {
                 alert('err');
             }
         }
+
     }
     return (
         <form >
@@ -382,7 +383,7 @@ const Share = () => {
                             alt=""
                         />
 
-                        <input type="text" placeholder={`What's on your mind ${user.name}?`}
+                        <input type="text" value={decs} placeholder={`What's on your mind ${user.name}?`}
                             onChange={handleInputChange}
 
                         />
